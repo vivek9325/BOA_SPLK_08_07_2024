@@ -1,3 +1,8 @@
 Splunk Enterprise Link ----
 
 wget -O splunk-9.2.2-d76edf6f0a15-Linux-x86_64.tgz "https://download.splunk.com/products/splunk/releases/9.2.2/linux/splunk-9.2.2-d76edf6f0a15-Linux-x86_64.tgz"
+
+
+Date & Time Function ----
+
+index=vk_idx | table _time, time_submitted, asset_id | eval time_submitted_epoc = strptime(time_submitted,"%d-%m-%y %H:%M") | eval time_submitted_format = strftime(time_submitted_epoc, "%d-%b-%Y")
