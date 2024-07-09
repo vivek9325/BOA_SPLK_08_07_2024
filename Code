@@ -54,3 +54,8 @@ index=vk_idx sourcetype="vk_txt" | erex email examples="MariaDubois@example.com,
 Regex ---
 
 index=vk_idx sourcetype="vk_txt" | regex _raw="From:\s+<[[:alnum:]]+@[[:alnum:]]+\.[[:alpha:]]+>"
+
+
+Eventcount ----
+
+| eventcount index=* summarize=false
