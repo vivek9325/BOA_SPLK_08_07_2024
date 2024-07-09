@@ -17,3 +17,10 @@ index=vk_idx
 | where last_modified_time_epoc > threshold_epoc 
 | eval ticket_state = if(current_ticket_state="Resolved" OR current_ticket_state="Closed", "Completed", "Incomplete") 
 | stats count by ticket_state
+
+
+Addcoltotal & Addtotal ----
+
+Addcoltotal ----
+
+index=vk_idx | chart count by current_ticket_state, asset_id | addcoltotals label=total labelfield=current_ticket_state
