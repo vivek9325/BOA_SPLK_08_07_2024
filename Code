@@ -29,3 +29,8 @@ Addtotal ----
 
 
 index=vk_idx | chart count by current_ticket_state, asset_id | addcoltotals label=total labelfield=current_ticket_state | addtotals
+
+
+Rex -----
+
+index="vk_idx" sourcetype="vk_txt" | rex field=_raw "From:\s+<(?P<from_email_id>.*)>\s+To" | table _raw, from_email_id
