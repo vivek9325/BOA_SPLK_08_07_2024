@@ -38,3 +38,4 @@ index="vk_idx" sourcetype="vk_txt" | rex field=_raw "From:\s+<(?P<from_email_id>
 
 |makeresults | eval text="user_id=vk;search;my_saved_search" | rex field=text "user_id=(?P<username>\w+);(?P<app_name>\w+);(?P<savedsearch_name>\w+)"
 
+|makeresults | eval credit_card_number="1234-5678-9101-1213" | rex field=credit_card_number max_match=0 offset_field=new_field "(?P<digits>\d{4})"
