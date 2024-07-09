@@ -6,3 +6,14 @@ wget -O splunk-9.2.2-d76edf6f0a15-Linux-x86_64.tgz "https://download.splunk.com/
 Date & Time Function ----
 
 index=vk_idx | table _time, time_submitted, asset_id | eval time_submitted_epoc = strptime(time_submitted,"%d-%m-%y %H:%M") | eval time_submitted_format = strftime(time_submitted_epoc, "%d-%b-%Y")
+
+
+USE CASE - 1 ------
+
+index=vk_idx 
+| table last_modified_time, current_ticket_state 
+| eval threshold="13-09-16 11:57" 
+| eval last_modified_time_epoc = strptime(last_modified_time, "%d-%m-%y %H:%M"), threshold_epoc=strptime(threshold,"%d-%m-%y %H:%M") 
+| where last_modified_time_epoc > threshold_epoc 
+| eval ticket_state = if(current_ticket_state="Resolved" OR current_ticket_state="Closed", "Completed", "Incomplete") 
+| stats count by ticket_state
