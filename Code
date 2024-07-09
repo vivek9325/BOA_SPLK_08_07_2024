@@ -49,3 +49,8 @@ Data masking ----
 erex ---
 
 index=vk_idx sourcetype="vk_txt" | erex email examples="MariaDubois@example.com,Exit_Desk@sample.net" | table email
+
+
+Regex ---
+
+index=vk_idx sourcetype="vk_txt" | regex _raw="From:\s+<[[:alnum:]]+@[[:alnum:]]+\.[[:alpha:]]+>"
