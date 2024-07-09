@@ -24,3 +24,8 @@ Addcoltotal & Addtotal ----
 Addcoltotal ----
 
 index=vk_idx | chart count by current_ticket_state, asset_id | addcoltotals label=total labelfield=current_ticket_state
+
+Addtotal ----
+
+
+index=vk_idx | chart count by current_ticket_state, asset_id | addcoltotals label=total labelfield=current_ticket_state | addtotals
