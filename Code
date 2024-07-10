@@ -59,3 +59,8 @@ index=vk_idx sourcetype="vk_txt" | regex _raw="From:\s+<[[:alnum:]]+@[[:alnum:]]
 Eventcount ----
 
 | eventcount index=* summarize=false
+
+
+Lookup ---------
+
+index=vk_idx source="Sample_tickets.csv" | table ticket_number, severity, current_ticket_state | lookup vk_sample_lookup.csv ticket_number OUTPUT time_taken as time_consumed
