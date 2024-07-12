@@ -64,3 +64,56 @@ Eventcount ----
 Lookup ---------
 
 index=vk_idx source="Sample_tickets.csv" | table ticket_number, severity, current_ticket_state | lookup vk_sample_lookup.csv ticket_number OUTPUT time_taken as time_consumed
+
+=========================================================================================================================================================================================================================
+
+
+Event Handler
+
+
+  <input type="dropdown" token="score_by" searchWhenChanged="true">
+      <label>Score By</label>
+      <choice value="all">All</choice>
+      <choice value="both">Both</choice>
+      <choice value="by_gender">Gender</choice>
+      <choice value="by_ethinicity">Ethnicity</choice>
+      <default>all</default>
+      <initialValue>all</initialValue>
+      
+      <change>
+        
+        <condition label="Gender">
+          
+          <set token="show_gender_score"></set>
+          <unset token="show_ethinicity_score"></unset>
+          <unset token="show_both_score"></unset>
+          
+        </condition>
+        
+        <condition value="by_ethinicity">
+          
+          <set token="show_ethinicity_score"></set>
+          <unset token="show_gender_score"></unset>
+          <unset token="show_both_score"></unset>
+          
+        </condition>
+        
+        <condition match="$value$==&quot;both&quot;">
+          
+          <set token="show_both_score"></set>
+          <unset token="show_ethinicity_score"></unset>
+          <unset token="show_gender_score"></unset>
+          
+        </condition>
+        
+        <condition>
+          
+          <set token="show_gender_score"></set>
+          <set token="show_ethinicity_score"></set>
+          <set token="show_both_score"></set>
+          
+        </condition>
+        
+        
+      </change>
+    </input>
