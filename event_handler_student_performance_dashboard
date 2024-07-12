@@ -50,10 +50,27 @@
         <choice value="avg_score_by_reading">Reading</choice>
         <choice value="avg_score_by_writing">Writing</choice>
         <choice value="avg_score_by_maths">Maths</choice>
+        
+        <change>
+          <condition value="avg_score_by_maths">
+            <set token="search_string1">stats avg("math score") as avg_math_score by gender</set>
+          </condition>
+            <condition value="avg_score_by_writing">
+            <set token="search_string1">stats avg("writing score") as avg_writing_score by gender</set>
+          </condition>
+          <condition value="avg_score_by_reading">
+            <set token="search_string1">stats avg("reading score") as avg_reading_score by gender</set>
+          </condition>
+          <condition value="avg_score_by_all">
+            <set token="search_string1">stats avg("reading score") as avg_reading_score, avg("writing score") as avg_writing_score, avg("math score") as avg_math_score by gender</set>
+          </condition>
+        </change>
+        
+        
       </input>
       <chart>
         <search>
-          <query>index=vk_student_performance | stats avg("math score") as avg_math_score, avg("writing score") as avg_writing_score, avg("reading score") as avg_reading_score by gender</query>
+          <query>index=vk_student_performance | $search_string1$</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
